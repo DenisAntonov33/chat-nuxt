@@ -1,6 +1,7 @@
 export const state = () => ({
   user: {},
   messages: [],
+  users: [],
 });
 
 export const mutations = {
@@ -13,15 +14,21 @@ export const mutations = {
   clearMessages(state) {
     state.messages = [];
   },
+  clearUsers(state) {
+    state.users = [];
+  },
+  SOCKET_newMessage(state, payload) {
+    state.messages = [...state.messages, payload];
+  },
+  SOCKET_updateUsers(state, payload) {
+    state.users = payload;
+  },
 };
 
 export const actions = {
-  SOCKET_newMessage(context, payload) {
-    console.log('context :', context);
-    console.log('payload :', payload);
-  },
   CLEAR_DATA({ commit }) {
     commit('clearUser');
     commit('clearMessages');
+    commit('clearUsers');
   },
 };
